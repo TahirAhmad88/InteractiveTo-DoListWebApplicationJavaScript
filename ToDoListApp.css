@@ -1,4 +1,4 @@
-/* It's about To-Do List App Project (To Do). */
+/* Responsive To-Do List App Styles */
 
 *{
     margin: 0;
@@ -12,21 +12,27 @@
     min-height: 100vh;
     background: linear-gradient(135deg, #153677, #4e085f);
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .todo-app{
     width: 100%;
     max-width: 540px;
     background: #fff;
-    margin: 100px auto 20px;  /*top, right & left, bottom.*/
-    padding: 40px 30px 70px;
+    /* Adjusted top margin for better mobile view */
+    margin: clamp(40px, 10vw, 100px) auto 20px; 
+    padding: clamp(20px, 5vw, 40px) clamp(15px, 5vw, 30px) 70px;
     border-radius: 10px;
 }
+
 .todo-app h2{
     color: #002765;
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    font-size: clamp(24px, 6vw, 32px);
 }
 
 .todo-app h2 img{
@@ -49,27 +55,31 @@ input{
     border: none;
     outline: none;
     background: transparent;
-    padding: 10px;
+    padding: 12px; /* Slightly increased for touch targets */
+    font-size: 16px;
+    min-width: 0; /* Prevents input from pushing row width on mobile */
 }
 
 button{
     border: none;
     outline: none;
-    padding: 16px 50px;     /*top & bottom, right & left.*/
+    padding: 16px 40px;
     background: #ff5945;
     color: #fff;
     font-size: 16px;
     cursor: pointer;
     border-radius: 40px;
+    font-weight: 500;
 }
 
 ul li{
     list-style: none;
-    font-size: 17px;
-    padding: 12px 8px 12px 50px;
+    font-size: clamp(15px, 4vw, 17px);
+    padding: 12px 45px 12px 50px; /* It is for right padding so text doesn't hit the 'X' */
     user-select: none;
     cursor: pointer;
     position: relative;
+    word-break: break-word; /* Prevents long tasks from breaking layout */
 }
 
 ul li::before{
@@ -81,7 +91,8 @@ ul li::before{
     background-image: url(images/unchecked.png);
     background-size: cover;
     background-position: center;
-    top: 12px;
+    top: 50%;
+    transform: translateY(-50%); /* Better vertical centering */
     left: 8px;
 }
 
@@ -94,10 +105,11 @@ ul li.checked::before{
     background-image: url(images/checked.png);
 }
 
-ul li span{   /*This is for the cross symbol.*/
+ul li span{
     position: absolute;
     right: 0;
-    top: 5px;
+    top: 50%;
+    transform: translateY(-50%);
     width: 40px;
     height: 40px;
     font-size: 22px;
@@ -108,5 +120,21 @@ ul li span{   /*This is for the cross symbol.*/
 }
 
 ul li span:hover{
-    background:  #edeef0;
+    background: #edeef0;
+}
+
+/* Mobile Adjustments for very small screens */
+@media (max-width: 450px) {
+    .row {
+        padding-left: 15px;
+    }
+    
+    button {
+        padding: 12px 25px;
+        font-size: 14px;
+    }
+
+    .todo-app {
+        padding-bottom: 40px;
+    }
 }
